@@ -1,0 +1,18 @@
+@startuml relationships_match
+hide circle
+left to right direction
+
+entity "Арбитр" as referee
+entity "Матч" as match
+entity "Команда" as team
+
+referee ||..o{ match : судит
+match }o..|| team : хозяева
+match }o..|| team : гости
+
+note bottom of match
+  Команда-хозяин и команда-гость
+  должны быть разными
+end note
+
+@enduml

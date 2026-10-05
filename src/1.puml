@@ -1,0 +1,63 @@
+@startuml library
+hide circle
+skinparam linetype ortho
+
+entity "Издательство" as publisher {
+  * Название
+  --
+  Адрес
+}
+
+entity "Книга" as book {
+  * ISBN
+  --
+  Название
+  Автор
+  Год издания
+  Количество страниц
+}
+
+entity "Категория" as category {
+  * Название
+}
+
+entity "Экземпляр" as copy <<weak>> {
+  * Номер копии
+  --
+  Место на полке
+}
+
+entity "Читатель" as reader {
+  * ID
+  --
+  Имя
+  Фамилия
+  Адрес
+  Дата рождения
+}
+
+entity "Выдача" as loan <<weak>> {
+  * Дата выдачи
+  --
+  Планируемая дата возврата
+  Фактическая дата возврата (может отсутствовать)
+}
+
+note right of copy
+  Ключ: ISBN книги + Номер копии
+end note
+
+note right of loan
+  Ключ: экземпляр + Дата выдачи.
+  Повторные выдачи одного экземпляра
+  тому же читателю — разные записи
+end note
+
+publisher ||..o{ book : выпускает
+book }o..|{ category : относится к
+category |o..o{ category : подкатегория
+book ||--o{ copy : имеет
+copy ||--o{ loan : выдаётся
+reader ||..o{ loan : берёт
+
+@enduml
