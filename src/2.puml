@@ -1,0 +1,16 @@
+@startuml relationships_address
+hide circle
+left to right direction
+
+entity "Страна" as country
+entity "Город" as city <<weak>>
+entity "Улица" as street <<weak>>
+entity "Дом" as house <<weak>>
+entity "Квартира" as flat <<weak>>
+
+country ||--o{ city
+city ||--o{ street
+street ||--o{ house
+house ||--o{ flat
+
+@enduml

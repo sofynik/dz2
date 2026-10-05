@@ -1,0 +1,15 @@
+@startuml relationships_parents
+hide circle
+left to right direction
+skinparam nodesep 80
+skinparam ranksep 120
+
+entity "Мужчина" as man
+entity "Женщина" as woman
+
+man ||..o{ man : "отец (сына)"
+man ||..o{ woman : "отец (дочери)"
+woman ||..o{ woman : "мать (дочери)"
+woman ||..o{ man : "мать (сына)"
+
+@enduml
